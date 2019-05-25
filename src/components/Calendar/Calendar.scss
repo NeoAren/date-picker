@@ -15,7 +15,6 @@ $accent-color: #ff6f6a;
 // Calendar
 .calendar {
    display: grid;
-
    position: relative;
    background: $base-color;
    border: 1px solid $border-color;
@@ -46,6 +45,8 @@ $accent-color: #ff6f6a;
    font-size: 20px; }
 &--l {
    font-size: 24px; }
+&--xl {
+   font-size: 28px; }
 &--prev {
    display: grid;
    grid-column: 1 / 2; }
@@ -83,27 +84,26 @@ $accent-color: #ff6f6a;
 &--s {
    font-size: 10px; }
 &--m {
-   font-size: 70%; }
+   font-size: 14px; }
 &--l {
-   font-size: 100%; } }
+   font-size: 16px; }
+&--xl {
+   font-size: 20px; } }
 
 // Calendar body
 .calendar-body {
    display: grid;
    padding: 5px;
-   grid-gap: 10px;
-   font-size: 82.5%;
-   grid-template-columns: repeat(7, calc(calc(100% - 60px) / 7));
+   grid-gap: 5px;
+   grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7));
 &--s {
-   grid-gap: 5px;
-   font-size: 11px;
-   grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7)); }
+   font-size: 12px; }
 &--m {
-   grid-gap: 5px;
-   font-size: 11px;
-   grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7)); }
+   font-size: 13px; }
 &--l {
-   font-size: 100%; }
+   font-size: 17px; }
+&--xl {
+   font-size: 20px; }
 
 // Calendar day
 &--day {
@@ -122,7 +122,7 @@ $accent-color: #ff6f6a;
    justify-content: center;
    background: $base-color;
 &:hover {
-   border: 2px solid #ff6f6a; }
+   border: 2px solid $accent-color; }
 &.today {
    color: $accent-color; }
 &.disabled {

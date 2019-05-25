@@ -62,7 +62,7 @@ const Calendar = ({ id, selected, size, lang }) => {
          const currentDay = dateFns.parse(day);
 
          // height = (width - border - padding - gap) / 7
-         const style = { height: ({ s: 158, m: 300, l: 400, xl: 500 }[size]) / 7 };
+         const style = { height: ({ s: 158, m: 258, l: 358, xl: 458 }[size]) / 7 };
          let className = 'calendar-body--day';
          className += !dateFns.isSameMonth(day, monthStart) ? ' disabled' : '';
          className += dateFns.isSameDay(day, selectedDate) ? ' selected' : '';

@@ -7,7 +7,7 @@ const App = () => {
 
    return (
       <div id="calendar-test">
-         <Calendar id="my-calendar" lang="en" size="s" />
+         <Calendar id="my-calendar" lang="en" size="xl" />
       </div>
    );
 
