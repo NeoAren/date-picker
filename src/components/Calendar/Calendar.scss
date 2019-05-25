@@ -1,0 +1,134 @@
+//
+// CALENDAR DESIGN
+//
+
+// Calendar colors
+$base-color: #ffffff;
+$border-color: #eeeeee;
+$header-color: #354052;
+$arrow-accent-color: #1a8fff;
+$day-name-color: #cccccc;
+$day-color: #354052;
+$disabled-color: #cccccc;
+$accent-color: #ff6f6a;
+
+// Calendar
+.calendar {
+   display: grid;
+
+   position: relative;
+   background: $base-color;
+   border: 1px solid $border-color;
+   grid-template-rows: repeat(3, max-content);
+&--s {
+   width: 200px; }
+&--m {
+   width: 300px; }
+&--l {
+   width: 400px; }
+&--xl {
+   width: 500px; }
+
+// Calendar header
+.calendar-header {
+   display: grid;
+   font-size: 100%;
+   font-weight: 700;
+   padding: 0.5em 0;
+   align-items: center;
+   color: $header-color;
+   text-transform: uppercase;
+   border-bottom: 1px solid $border-color;
+   grid-template-columns: max-content 1fr max-content;
+&--s {
+   font-size: 13px; }
+&--m {
+   font-size: 20px; }
+&--l {
+   font-size: 24px; }
+&--prev {
+   display: grid;
+   grid-column: 1 / 2; }
+&--month {
+   display: grid;
+   width: 100%;
+   grid-column: 2 / 3;
+   text-align: center; }
+&--next {
+   display: grid;
+   grid-column: 3 / 4; }
+.icon {
+   cursor: pointer;
+   transition: 0.15s ease-out;
+&:hover {
+   transform: scale(1.5);
+   transition: 0.25s ease-out;
+   color: $arrow-accent-color; }
+&:first-of-type {
+   margin-left: 1em; }
+&:last-of-type {
+   margin-right: 1em; } } }
+
+// Calendar daylist
+.calendar-daylist {
+   display: grid;
+   padding: 0.75em 0;
+   grid-template-columns: repeat(7, 1fr);
+   border-bottom: 1px solid $border-color;
+&--day {
+   font-weight: 400;
+   text-align: center;
+   color: $day-name-color;
+   text-transform: uppercase; }
+&--s {
+   font-size: 10px; }
+&--m {
+   font-size: 70%; }
+&--l {
+   font-size: 100%; } }
+
+// Calendar body
+.calendar-body {
+   display: grid;
+   padding: 5px;
+   grid-gap: 10px;
+   font-size: 82.5%;
+   grid-template-columns: repeat(7, calc(calc(100% - 60px) / 7));
+&--s {
+   grid-gap: 5px;
+   font-size: 11px;
+   grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7)); }
+&--m {
+   grid-gap: 5px;
+   font-size: 11px;
+   grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7)); }
+&--l {
+   font-size: 100%; }
+
+// Calendar day
+&--day {
+   display: grid;
+   width: 100%;
+   height: 100%;
+   line-height: 1;
+   cursor: pointer;
+   font-weight: 700;
+   overflow: hidden;
+   color: $day-color;
+   text-align: center;
+   font-size: inherit;
+   border-radius: 50%;
+   align-content: center;
+   justify-content: center;
+   background: $base-color;
+&:hover {
+   border: 2px solid #ff6f6a; }
+&.today {
+   color: $accent-color; }
+&.disabled {
+   pointer-events: none !important;
+   color: $disabled-color !important;
+   background: transparent !important; }
+&.selected {
+   color: $base-color !important;
+   background: $accent-color !important; } } } }
