@@ -21,15 +21,15 @@ const Calendar = ({ id, selected, size, lang }) => {
    // Render the header
    const renderHeader = () => {
       return (
-         <div className={'calendar-header calendar-header--' + size}>
+         <div className="calendar-header">
             <div className="calendar-header--prev" onClick={prevMonth}>
-               <div className="icon">chevron_left</div>
+               <div>chevron_left</div>
             </div>
             <div className="calendar-header--month">
                <span>{dateFns.format(currentMonth, 'MMMM YYYY', locale)}</span>
             </div>
             <div className="calendar-header--next" onClick={nextMonth}>
-               <div className="icon">chevron_right</div>
+               <div>chevron_right</div>
             </div>
          </div>
       );
@@ -44,7 +44,7 @@ const Calendar = ({ id, selected, size, lang }) => {
             <div className="calendar-daylist--day" key={i}>{dateFns.format(dateFns.addDays(startDate, i), 'dd', locale)}</div>
          );
       }
-      return <div className={'calendar-daylist calendar-daylist--' + size}>{days}</div>;
+      return <div className="calendar-daylist">{days}</div>;
    };
 
    // Render the body
@@ -60,27 +60,24 @@ const Calendar = ({ id, selected, size, lang }) => {
       // Loop through the displayed days
       while (day <= endDate) {
          const currentDay = dateFns.parse(day);
-
-         // height = (width - border - padding - gap) / 7
-         const style = { height: ({ s: 158, m: 258, l: 358, xl: 458 }[size]) / 7 };
          let className = 'calendar-body--day';
          className += !dateFns.isSameMonth(day, monthStart) ? ' disabled' : '';
          className += dateFns.isSameDay(day, selectedDate) ? ' selected' : '';
          className += dateFns.isSameDay(day, new Date()) ? ' today' : '';
          daysInMonth.push(
-            <div className={className} style={style} key={day} onClick={() => setSelectedDate(currentDay)}>
+            <div className={className} key={day} onClick={() => setSelectedDate(currentDay)}>
                {dateFns.format(day, 'D')}
             </div>
          );
          day = dateFns.addDays(day, 1);
       }
 
-      return <div className={'calendar-body calendar-body--' + size}>{daysInMonth}</div>;
+      return <div className="calendar-body">{daysInMonth}</div>;
    };
 
    // Render Calendar component
    return (
-      <div className={'calendar calendar--' + size}>
+      <div id={id} className={'calendar calendar--' + size}>
          {renderHeader()}
          {renderDaylist()}
          {renderBody()}
@@ -91,7 +88,7 @@ const Calendar = ({ id, selected, size, lang }) => {
 
 Calendar.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-   selectedDate: PropTypes.number,
+   selected: PropTypes.number,
    size: PropTypes.oneOf(['s', 'm', 'l', 'xl']),
    lang: PropTypes.string
 };

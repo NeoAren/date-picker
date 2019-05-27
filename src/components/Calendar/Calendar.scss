@@ -2,7 +2,7 @@
 // CALENDAR DESIGN
 //
 
-// Calendar colors
+// Set color variables
 $base-color: #ffffff;
 $border-color: #eeeeee;
 $header-color: #354052;
@@ -12,26 +12,79 @@ $day-color: #354052;
 $disabled-color: #cccccc;
 $accent-color: #ff6f6a;
 
-// Calendar
+// Import fonts 'Open Sans' and 'Material Icons'
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+// Calendar component design
 .calendar {
    display: grid;
    position: relative;
+   box-sizing: border-box;
    background: $base-color;
    border: 1px solid $border-color;
    grid-template-rows: repeat(3, max-content);
+   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+// Apply rules to all components
+* {
+   margin: 0px;
+   padding: 0px;
+   box-sizing: border-box;
+   outline: 0px !important;
+   user-select: none !important; }
+
+// Size: small
 &--s {
-   width: 200px; }
+   width: 200px;
+.calendar-header {
+   font-size: 13px; }
+.calendar-daylist {
+   font-size: 10px; }
+.calendar-body {
+   font-size: 11px;
+&--day {
+   height: calc(158px / 7); } } }
+
+// Size: medium
 &--m {
-   width: 300px; }
+   width: 300px;
+.calendar-header {
+   font-size: 20px; }
+.calendar-daylist {
+   font-size: 14px; }
+.calendar-body {
+   font-size: 14px;
+&--day {
+   height: calc(258px / 7); } } }
+
+// Size: large
 &--l {
-   width: 400px; }
+   width: 400px;
+.calendar-header {
+   font-size: 24px; }
+.calendar-daylist {
+   font-size: 16px; }
+.calendar-body {
+   font-size: 17px;
+&--day {
+   height: calc(358px / 7); } } }
+
+// Size: extra large
 &--xl {
-   width: 500px; }
+   width: 500px;
+.calendar-header {
+   font-size: 28px; }
+.calendar-daylist {
+   font-size: 20px; }
+.calendar-body {
+   font-size: 20px;
+&--day {
+   height: calc(458px / 7); } } }
 
 // Calendar header
 .calendar-header {
    display: grid;
-   font-size: 100%;
    font-weight: 700;
    padding: 0.5em 0;
    align-items: center;
@@ -39,14 +92,6 @@ $accent-color: #ff6f6a;
    text-transform: uppercase;
    border-bottom: 1px solid $border-color;
    grid-template-columns: max-content 1fr max-content;
-&--s {
-   font-size: 13px; }
-&--m {
-   font-size: 20px; }
-&--l {
-   font-size: 24px; }
-&--xl {
-   font-size: 28px; }
 &--prev {
    display: grid;
    grid-column: 1 / 2; }
@@ -58,9 +103,23 @@ $accent-color: #ff6f6a;
 &--next {
    display: grid;
    grid-column: 3 / 4; }
-.icon {
+&--prev div, &--next div {
+   font-family: "Material Icons", serif;
+   font-style: normal;
    cursor: pointer;
+   direction: ltr;
+   line-height: 1;
+   word-wrap: normal;
+   white-space: nowrap;
+   display: inline-block;
+   vertical-align: middle;
+   text-transform: none;
+   letter-spacing: normal;
    transition: 0.15s ease-out;
+   -webkit-font-smoothing: antialiased;
+   text-rendering: optimizeLegibility;
+   -moz-osx-font-smoothing: grayscale;
+   font-feature-settings: "liga";
 &:hover {
    transform: scale(1.5);
    transition: 0.25s ease-out;
@@ -80,15 +139,7 @@ $accent-color: #ff6f6a;
    font-weight: 400;
    text-align: center;
    color: $day-name-color;
-   text-transform: uppercase; }
-&--s {
-   font-size: 10px; }
-&--m {
-   font-size: 14px; }
-&--l {
-   font-size: 16px; }
-&--xl {
-   font-size: 20px; } }
+   text-transform: uppercase; } }
 
 // Calendar body
 .calendar-body {
@@ -96,20 +147,9 @@ $accent-color: #ff6f6a;
    padding: 5px;
    grid-gap: 5px;
    grid-template-columns: repeat(7, calc(calc(100% - 30px) / 7));
-&--s {
-   font-size: 12px; }
-&--m {
-   font-size: 13px; }
-&--l {
-   font-size: 17px; }
-&--xl {
-   font-size: 20px; }
-
-// Calendar day
 &--day {
    display: grid;
    width: 100%;
-   height: 100%;
    line-height: 1;
    cursor: pointer;
    font-weight: 700;
