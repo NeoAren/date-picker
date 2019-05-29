@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Calendar from './Calendar';
+import DatePicker from './DatePicker';
 
 const App = () => {
 
+   // <DatePicker id="picker1" lang="en" />
+   // <br /><br />
+
    return (
       <div id="calendar-test">
-         <Calendar id="my-calendar" lang="en" size="m" selected={1001800800000} />
-         <input type="datetime-local" />
+
+         <DatePicker id="picker2" lang="en" selected={1001800800000} />
       </div>
    );
 

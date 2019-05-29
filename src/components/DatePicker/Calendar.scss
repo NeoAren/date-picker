@@ -151,7 +151,6 @@ $accent-color: #ff6f6a;
    display: grid;
    width: 100%;
    line-height: 1;
-   cursor: pointer;
    font-weight: 700;
    overflow: hidden;
    color: $day-color;
@@ -161,7 +160,9 @@ $accent-color: #ff6f6a;
    align-content: center;
    justify-content: center;
    background: $base-color;
+   font-variant-numeric: tabular-nums;
 &:hover {
+   cursor: pointer;
    border: 2px solid $accent-color; }
 &.today {
    color: $accent-color; }
