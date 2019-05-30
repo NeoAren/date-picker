@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import dateFns from "date-fns";
 
 import './DatePicker.scss';
+import Wrapper from './Wrapper';
 import loadLocaleFile from './loadLocaleFile';
 import { Calendar, Close, ChevronLeft, ChevronRight } from './icons';
-
-import Wrapper from './Wrapper';
 
 const DatePicker = ({ id, selected, lang }) => {
 
@@ -17,22 +16,6 @@ const DatePicker = ({ id, selected, lang }) => {
    // Save the current month and the selected date in the state
    const [currentMonth, setCurrentMonth] = useState(selected || new Date());
    const [selectedDate, setSelectedDate] = useState(selected || undefined);
-
-   // Render date-picker input field
-   const renderInputField = () => {
-      const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
-      const clear = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
-      const className = 'date-picker-input';
-      return (
-         <div id={id} className="date-picker">
-            <div className={className + (selectedDate ? ' ' + className + '--selected' : '')}>
-               <input readOnly className={className + '__field'} value={formattedDate} placeholder="Select date" />
-               <i className={className + '__close-icon'} onClick={clear}><Close /></i>
-               <i className={className + '__calendar-icon'}><Calendar /></i>
-            </div>
-         </div>
-      );
-   };
 
    // Render the header
    const renderHeader = () => {
@@ -91,35 +74,39 @@ const DatePicker = ({ id, selected, lang }) => {
       return <div className="date-picker-container__body">{daysInMonth}</div>;
    };
 
-   /*
-   const renderDatePicker = (
-      <div id={id} className="date-picker">
-         <div className="date-picker-container">
-            <div className="date-picker-container__input-wrapper">
-               <input className="date-picker-container__input" placeholder="Select date" />
+   // Render date-picker container
+   const renderDatePicker = () => {
+      const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
+      const className = 'date-picker-container';
+      return (
+         <div id={id} className={className}>
+            <div className={className + '__input-wrapper'}>
+               <input className={className + '__input'} autoFocus={true} defaultValue={formattedDate} placeholder="Select date" />
             </div>
-            <div className="date-picker-container__picker">
+            <div className={className + '__picker'}>
                {renderHeader()}
                {renderBody()}
             </div>
          </div>
-      </div>
-   );
-   */
+      );
+   };
 
-   const renderDatePicker = (
-      <div id={id} className="date-picker-container">
-         <div className="date-picker-container__input-wrapper">
-            <input className="date-picker-container__input" placeholder="Select date" />
+   // Render date-picker input field
+   const renderInputField = () => {
+      const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
+      const clear = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
+      const className = 'date-picker-input';
+      return (
+         <div id={id} className={className}>
+            <input readOnly className={className + '__field'} value={formattedDate} placeholder="Select date" />
+            <i className={className + '__close-icon'} onClick={clear}><Close /></i>
+            <i className={className + '__calendar-icon'}><Calendar /></i>
          </div>
-         <div className="date-picker-container__picker">
-            {renderHeader()}
-            {renderBody()}
-         </div>
-      </div>
-   );
+      );
+   };
 
-   return <Wrapper id={id} inputField={renderInputField()} datePicker={renderDatePicker} />;
+   // Render the date-picker
+   return <Wrapper id={id} inputField={renderInputField()} datePicker={renderDatePicker()} />;
 
 };
 

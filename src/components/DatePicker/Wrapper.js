@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 
 const Wrapper = ({ id, inputField, datePicker }) => {
 
-   // Save the 'open' state of the player
+   // State of the date-picker
    const [open, setOpen] = useState(false);
 
    // Open or close the date-picker
    useEffect(() => {
       const openCloseDatePicker = e => {
-         if (!open && e.target.className === 'date-picker-input__field') setOpen(true);
-         if (open && !document.querySelector('#' + id).contains(e.target)) setOpen(false);
+         const datePickerElement = document.querySelector('#' + id);
+         if (!open && datePickerElement.contains(e.target)) {
+            if (!datePickerElement.childNodes[1].contains(e.target)) setOpen(true);
+         }
+         if (open && !datePickerElement.contains(e.target)) setOpen(false);
       };
       document.addEventListener('click', openCloseDatePicker);
       return () => document.removeEventListener('click', openCloseDatePicker);

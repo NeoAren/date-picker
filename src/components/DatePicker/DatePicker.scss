@@ -53,11 +53,11 @@
 &__calendar-icon {
    display: grid;
    opacity: 1;
-   padding: 1px;
    fill: #dddddd;
-   margin: 0 5px;
+   border-radius: 5px;
    align-items: center;
    transition: opacity 0.4s;
+   border: 5px solid #ffffff;
 svg {
    width: 20px;
    height: 20px; } }
@@ -65,7 +65,7 @@ svg {
 // Close icon
 &__close-icon {
    display: grid;
-   // height: 100%;
+   height: 100%;
    opacity: 0;
    padding: 0;
    fill: #ffffff;
@@ -82,20 +82,20 @@ svg {
    background: #bbbbbb; } }
 
 // Switch between calendar and close icons
-&--selected:hover &__calendar-icon {
-   margin: 0;
+&:hover > &__field:not([value=""]) ~ &__calendar-icon {
+   border: 0;
    padding: 0;
    opacity: 0;
 svg {
    width: 0;
    height: 0; } }
-&--selected:hover &__close-icon {
+&:hover > &__field:not([value=""]) ~ &__close-icon {
    opacity: 1;
-   padding: 2px;
-   border-width: 5px 7px;
+   padding: 3px;
+   border-width: 6px;
 svg {
-   width: 14px;
-   height: 14px; } }
+   width: 12px;
+   height: 12px; } }
 
 // Hovered and active styles
 &:hover {
@@ -128,16 +128,18 @@ svg {
 
 &__input-wrapper {
    width: 100%;
-   padding: 7px 10px;
+   height: 31px;
    border-bottom: 1px solid #eeeeee; }
 
 &__input {
    width: 100%;
+   height: 100%;
    border: none;
-   color: #bbbbbb;
-   font-size: 14px;
+   min-width: 0px;
+   color: #354052;
+   font-size: 15px;
+   padding: 0px 10px;
    margin: 0 !important;
-   padding: 0 !important;
    outline: 0 !important;
    font-variant: tabular-nums;
    font-feature-settings: "tnum";
