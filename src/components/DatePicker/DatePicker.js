@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import dateFns from "date-fns";
@@ -13,9 +13,15 @@ const DatePicker = ({ id, selected, lang }) => {
    // Load the locale file
    const locale = { locale: loadLocaleFile(lang) };
 
-   // Save the current month and the selected date in the state
+   // Save the current month and the selected date (+ref) in the state
    const [currentMonth, setCurrentMonth] = useState(selected || new Date());
    const [selectedDate, setSelectedDate] = useState(selected || undefined);
+   const selectedDateRef = useRef(selectedDate);
+
+   // Update reference when 'selectedDate' changes
+   useEffect(() => {
+      selectedDateRef.current = selectedDate;
+   }, [selectedDate]);
 
    // Render the header
    const renderHeader = () => {
@@ -40,11 +46,11 @@ const DatePicker = ({ id, selected, lang }) => {
    const renderBody = () => {
       const monthStart = dateFns.startOfMonth(currentMonth);
       const monthEnd = dateFns.endOfMonth(monthStart);
-      const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
-      const endDate = dateFns.endOfWeek(monthEnd, { weekStartsOn: 1 });
+      const dateStart = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
+      const dateEnd = dateFns.endOfWeek(monthEnd, { weekStartsOn: 1 });
 
       let daysInMonth = [];
-      let day = startDate;
+      let day = dateStart;
 
       // Loop through the days of the week
       const startOfWeek = dateFns.startOfWeek(currentMonth, { weekStartsOn: 1 });
@@ -57,14 +63,15 @@ const DatePicker = ({ id, selected, lang }) => {
       }
 
       // Loop through the displayed days
-      while (day <= endDate) {
+      while (day <= dateEnd) {
          const currentDay = dateFns.parse(day);
          let className = 'date-picker-container__body-day';
          className += !dateFns.isSameMonth(day, monthStart) ? ' date-picker--disabled' : '';
          className += dateFns.isSameDay(day, selectedDate) ? ' date-picker--selected' : '';
          className += dateFns.isSameDay(day, new Date()) ? ' date-picker--today' : '';
+         const select = () => { setSelectedDate(currentDay); setCurrentMonth(currentDay); };
          daysInMonth.push(
-            <div className={className} key={day} onClick={() => setSelectedDate(currentDay)}>
+            <div className={className} key={day} onClick={select}>
                {dateFns.format(day, 'D')}
             </div>
          );
@@ -76,17 +83,17 @@ const DatePicker = ({ id, selected, lang }) => {
 
    // Render date-picker container
    const renderDatePicker = () => {
+      const inputElement = document.querySelector('#' + id + '-input');
+      const style = inputElement && { top: inputElement.offsetTop, left: inputElement.offsetLeft };
       const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
       const className = 'date-picker-container';
       return (
-         <div id={id} className={className}>
+         <div id={id + '-container'} className={className} style={style}>
             <div className={className + '__input-wrapper'}>
                <input className={className + '__input'} autoFocus={true} defaultValue={formattedDate} placeholder="Select date" />
             </div>
-            <div className={className + '__picker'}>
-               {renderHeader()}
-               {renderBody()}
-            </div>
+            {renderHeader()}
+            {renderBody()}
          </div>
       );
    };
@@ -97,7 +104,7 @@ const DatePicker = ({ id, selected, lang }) => {
       const clear = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
       const className = 'date-picker-input';
       return (
-         <div id={id} className={className}>
+         <div id={id + '-input'} className={className}>
             <input readOnly className={className + '__field'} value={formattedDate} placeholder="Select date" />
             <i className={className + '__close-icon'} onClick={clear}><Close /></i>
             <i className={className + '__calendar-icon'}><Calendar /></i>
@@ -105,8 +112,11 @@ const DatePicker = ({ id, selected, lang }) => {
       );
    };
 
+   // Set the current month to the month of the selected date
+   const close = () => setCurrentMonth(selectedDateRef.current);
+
    // Render the date-picker
-   return <Wrapper id={id} inputField={renderInputField()} datePicker={renderDatePicker()} />;
+   return <Wrapper id={id} inputField={renderInputField} datePicker={renderDatePicker} close={close} />;
 
 };
 

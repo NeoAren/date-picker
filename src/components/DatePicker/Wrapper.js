@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-const Wrapper = ({ id, inputField, datePicker }) => {
+const Wrapper = ({ id, inputField, datePicker, close }) => {
 
    // State of the date-picker
    const [open, setOpen] = useState(false);
 
+   // Close function
+   const closeDatePicker = () => {
+      setOpen(false);
+      close();
+   };
+
    // Open or close the date-picker
    useEffect(() => {
       const openCloseDatePicker = e => {
-         const datePickerElement = document.querySelector('#' + id);
-         if (!open && datePickerElement.contains(e.target)) {
-            if (!datePickerElement.childNodes[1].contains(e.target)) setOpen(true);
+         const inputElement = document.querySelector('#' + id + '-input');
+         const datePickerElement = document.querySelector('#' + id + '-container');
+         if (!open && inputElement.contains(e.target)) {
+            if (!inputElement.childNodes[1].contains(e.target)) setOpen(true);
          }
-         if (open && !datePickerElement.contains(e.target)) setOpen(false);
+         if (open && !datePickerElement.contains(e.target)) closeDatePicker();
       };
       document.addEventListener('click', openCloseDatePicker);
       return () => document.removeEventListener('click', openCloseDatePicker);
@@ -22,7 +29,7 @@ const Wrapper = ({ id, inputField, datePicker }) => {
 
    // Close the date-picker when the window is resized
    useEffect(() => {
-      window.onresize = () => open && setOpen(false);
+      window.onresize = () => open && closeDatePicker();
    }, [open]);
 
    // Add date-picker overlay if it doesn't exist
@@ -34,18 +41,20 @@ const Wrapper = ({ id, inputField, datePicker }) => {
    }, []);
 
    // Render the date-picker or the input field
-   if (open) {
-      return ReactDOM.createPortal(datePicker, document.querySelector('#date-picker-overlay'));
-   } else {
-      return inputField;
-   }
+   return (
+      <>
+         {inputField()}
+         {open && ReactDOM.createPortal(datePicker(), document.querySelector('#date-picker-overlay'))}
+      </>
+   );
 
 };
 
 Wrapper.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-   inputField: PropTypes.node.isRequired,
-   datePicker: PropTypes.node.isRequired
+   inputField: PropTypes.func.isRequired,
+   datePicker: PropTypes.func.isRequired,
+   close: PropTypes.func.isRequired
 };
 
 export default Wrapper;
