@@ -31,7 +31,7 @@ const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }
       // Loop through the days of the week
       for (let i = 0; i < 7; i++) {
          daysInMonth.push(
-            <div className={className + '__body-day neodatepicker--daylist'} key={i}>
+            <div className={className + '__body-day'} key={i}>
                {format(addDays(day, i), 'dd', locale)}
             </div>
          );
@@ -40,11 +40,11 @@ const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }
       // Loop through the displayed days
       while (day <= dateEnd) {
          const currentDay = parse(day);
-         let dayClassName = className + '__body-day';
+         let dayClassName = className + '__body-item';
          dayClassName += !isSameMonth(day, month) ? ' neodatepicker--disabled' : '';
          dayClassName += isSameDay(day, selected) ? ' neodatepicker--selected' : '';
          dayClassName += isSameDay(day, new Date()) ? ' neodatepicker--today' : '';
-         const select = () => updateSelected(currentDay);
+         const select = e => updateSelected(currentDay);
          daysInMonth.push(
             <div className={dayClassName} key={day} onClick={select}>
                {format(day, 'D')}

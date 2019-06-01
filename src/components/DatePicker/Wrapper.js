@@ -32,6 +32,9 @@ const Wrapper = ({ id, selected, lang }) => {
          if (!open && inputElement.contains(e.target)) {
             if (!inputElement.childNodes[1].contains(e.target)) setOpen(true);
          }
+         if (open && typeof e.target.className === 'string') {
+            if (e.target.className.includes('neodatepicker-picker__body-item')) return;
+         }
          if (open && !pickerElement.contains(e.target)) {
             setOpen(false);
             setCurrentMonth(selectedDate || new Date());
@@ -58,19 +61,26 @@ const Wrapper = ({ id, selected, lang }) => {
       getNode('body').appendChild(containerElement);
    }, []);
 
-   // Clear selected
+   // Functions passed down to InputField and DatePicker
    const clearSelected = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
 
    const updateMonth = modifier => setCurrentMonth(addMonths(currentMonth, modifier));
 
-   const updateSelected = newSelected => { setSelectedDate(newSelected); setCurrentMonth(newSelected); };
+   const updateSelected = updated => { setSelectedDate(updated); setCurrentMonth(updated); setOpen(false); };
 
    // Render the date-picker or the input field
    return (
       <>
          <InputField id={id} selected={selectedDate} clearSelected={clearSelected} />
          {open && ReactDOM.createPortal((
-            <DatePicker id={id} selected={selectedDate} month={currentMonth} updateSelected={updateSelected} updateMonth={updateMonth} locale={locale} />
+            <DatePicker
+               id={id}
+               selected={selectedDate}
+               month={currentMonth}
+               updateSelected={updateSelected}
+               updateMonth={updateMonth}
+               locale={locale}
+            />
          ), getNode('#neodatepicker-container'))}
       </>
    );

@@ -88,14 +88,26 @@ svg {
    font-weight: 400;
    overflow: hidden;
    text-align: center;
+   align-content: center;
+   justify-content: center;
+   background: transparent; }
+
+// Body item
+&__body-item {
+   display: grid;
+   width: 100%;
+   height: 32.56px;
+   color: #354052;
+   line-height: 1;
+   font-size: 15px;
+   font-weight: 400;
+   overflow: hidden;
+   text-align: center;
    border-radius: 50%;
    background: #ffffff;
    align-content: center;
-   // transition: border .2s;
    justify-content: center;
    border: 2px solid #ffffff;
-   font-feature-settings: 'tnum';
-   font-variant-numeric: tabular-nums;
 &:hover {
    cursor: pointer !important;
    border: 2px solid #ff6f6a !important; }
@@ -109,7 +121,4 @@ svg {
 &--disabled {
    color: #cccccc;
    background: transparent;
-   pointer-events: none !important; }
-&--daylist {
-   pointer-events: none !important;
-   background: transparent !important; } } } }
+   pointer-events: none !important; } } } }
