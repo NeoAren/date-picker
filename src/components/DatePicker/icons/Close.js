@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // Return 'Close' icon
 const Close = ({ id, className }) => (

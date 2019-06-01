@@ -1,133 +1,91 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
-import dateFns from "date-fns";
+import { format, parse, addDays, isSameDay, isSameMonth } from 'date-fns';
+import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
 
 import './DatePicker.scss';
-import Wrapper from './Wrapper';
-import loadLocaleFile from './loadLocaleFile';
-import { Calendar, Close, ChevronLeft, ChevronRight } from './icons';
 
-const DatePicker = ({ id, selected, lang }) => {
+import { ChevronLeft, ChevronRight } from './icons';
 
-   // Load the locale file
-   const locale = { locale: loadLocaleFile(lang) };
+const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }) => {
 
-   // Save the current month and the selected date (+ref) in the state
-   const [currentMonth, setCurrentMonth] = useState(selected || new Date());
-   const [selectedDate, setSelectedDate] = useState(selected || undefined);
-   const selectedDateRef = useRef(selectedDate);
+   // Set the position of the date-picker
+   const inputElement = document.querySelector('#' + id + '-input');
+   const style = inputElement && { top: inputElement.offsetTop, left: inputElement.offsetLeft };
 
-   // Update reference when 'selectedDate' changes
-   useEffect(() => {
-      selectedDateRef.current = selectedDate;
-   }, [selectedDate]);
+   // Set start and end of the displayed date interval
+   const dateStart = startOfWeek(startOfMonth(month), { weekStartsOn: 1 });
+   const dateEnd = endOfWeek(endOfMonth(month), { weekStartsOn: 1 });
 
-   // Render the header
-   const renderHeader = () => {
-      const prevMonth = () => setCurrentMonth(dateFns.subMonths(currentMonth, 1));
-      const nextMonth = () => setCurrentMonth(dateFns.addMonths(currentMonth, 1));
-      return (
-         <div className="date-picker-container__header">
-            <div className="date-picker-container__header-prev" onClick={prevMonth}>
-               <ChevronLeft />
-            </div>
-            <div className="date-picker-container__header-month">
-               <span>{dateFns.format(currentMonth, 'MMMM YYYY', locale)}</span>
-            </div>
-            <div className="date-picker-container__header-next" onClick={nextMonth}>
-               <ChevronRight />
-            </div>
-         </div>
-      );
-   };
+   // Set formatted date, onChange handler and base classname
+   const date = !selected ? '' : format(selected, 'YYYY-MM-DD');
+   const onChange = e => console.log(e.target.value);
+   const className = 'neodatepicker-picker';
 
    // Render the body
    const renderBody = () => {
-      const monthStart = dateFns.startOfMonth(currentMonth);
-      const monthEnd = dateFns.endOfMonth(monthStart);
-      const dateStart = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
-      const dateEnd = dateFns.endOfWeek(monthEnd, { weekStartsOn: 1 });
 
       let daysInMonth = [];
       let day = dateStart;
 
       // Loop through the days of the week
-      const startOfWeek = dateFns.startOfWeek(currentMonth, { weekStartsOn: 1 });
       for (let i = 0; i < 7; i++) {
          daysInMonth.push(
-            <div className="date-picker-container__body-day date-picker--daylist" key={i}>
-               {dateFns.format(dateFns.addDays(startOfWeek, i), 'dd', locale)}
+            <div className={className + '__body-day neodatepicker--daylist'} key={i}>
+               {format(addDays(day, i), 'dd', locale)}
             </div>
          );
       }
 
       // Loop through the displayed days
       while (day <= dateEnd) {
-         const currentDay = dateFns.parse(day);
-         let className = 'date-picker-container__body-day';
-         className += !dateFns.isSameMonth(day, monthStart) ? ' date-picker--disabled' : '';
-         className += dateFns.isSameDay(day, selectedDate) ? ' date-picker--selected' : '';
-         className += dateFns.isSameDay(day, new Date()) ? ' date-picker--today' : '';
-         const select = () => { setSelectedDate(currentDay); setCurrentMonth(currentDay); };
+         const currentDay = parse(day);
+         let dayClassName = className + '__body-day';
+         dayClassName += !isSameMonth(day, month) ? ' neodatepicker--disabled' : '';
+         dayClassName += isSameDay(day, selected) ? ' neodatepicker--selected' : '';
+         dayClassName += isSameDay(day, new Date()) ? ' neodatepicker--today' : '';
+         const select = () => updateSelected(currentDay);
          daysInMonth.push(
-            <div className={className} key={day} onClick={select}>
-               {dateFns.format(day, 'D')}
+            <div className={dayClassName} key={day} onClick={select}>
+               {format(day, 'D')}
             </div>
          );
-         day = dateFns.addDays(day, 1);
+         day = addDays(day, 1);
       }
 
-      return <div className="date-picker-container__body">{daysInMonth}</div>;
+      return daysInMonth;
    };
 
-   // Render date-picker container
-   const renderDatePicker = () => {
-      const inputElement = document.querySelector('#' + id + '-input');
-      const style = inputElement && { top: inputElement.offsetTop, left: inputElement.offsetLeft };
-      const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
-      const className = 'date-picker-container';
-      return (
-         <div id={id + '-container'} className={className} style={style}>
-            <div className={className + '__input-wrapper'}>
-               <input className={className + '__input'} autoFocus={true} defaultValue={formattedDate} placeholder="Select date" />
+   // Render DatePicker component
+   return (
+      <div id={id + '-picker'} className={className} style={style}>
+         <div className={className + '__input-wrapper'}>
+            <input className={className + '__input'} autoFocus={true} value={date} onChange={onChange} placeholder="Select date" />
+         </div>
+         <div className={className + '__header'}>
+            <div className={className + '__header-prev'} onClick={() => updateMonth(-1)}>
+               <ChevronLeft />
             </div>
-            {renderHeader()}
-            {renderBody()}
+            <div className={className + '__header-month'}>
+               <span>{format(month, 'MMMM YYYY', locale)}</span>
+            </div>
+            <div className={className + '__header-next'} onClick={() => updateMonth(1)}>
+               <ChevronRight />
+            </div>
          </div>
-      );
-   };
-
-   // Render date-picker input field
-   const renderInputField = () => {
-      const formattedDate = !selectedDate ? '' : dateFns.format(selectedDate, 'YYYY-MM-DD');
-      const clear = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
-      const className = 'date-picker-input';
-      return (
-         <div id={id + '-input'} className={className}>
-            <input readOnly className={className + '__field'} value={formattedDate} placeholder="Select date" />
-            <i className={className + '__close-icon'} onClick={clear}><Close /></i>
-            <i className={className + '__calendar-icon'}><Calendar /></i>
-         </div>
-      );
-   };
-
-   // Set the current month to the month of the selected date
-   const close = () => setCurrentMonth(selectedDateRef.current);
-
-   // Render the date-picker
-   return <Wrapper id={id} inputField={renderInputField} datePicker={renderDatePicker} close={close} />;
+         <div className={className + '__body'}>{renderBody()}</div>
+      </div>
+   );
 
 };
 
 DatePicker.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-   selected: PropTypes.number,
-   lang: PropTypes.string
-};
-
-DatePicker.defaultProps = {
-   lang: 'en'
+   selected: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
+   month: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
+   updateSelected: PropTypes.func.isRequired,
+   updateMonth: PropTypes.func.isRequired,
+   locale: PropTypes.object
 };
 
 export default DatePicker;

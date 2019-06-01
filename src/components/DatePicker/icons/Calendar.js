@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // Return 'Calendar' icon
 const Calendar = ({ id, className }) => (

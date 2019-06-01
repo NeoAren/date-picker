@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // Return 'ChevronLeft' icon
 const ChevronLeft = ({ id, className }) => (

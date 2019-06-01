@@ -1,120 +1,9 @@
 //
-// DATEPICKER DESIGN
+// NEO-DATE-PICKER - DATE PICKER DESIGN
 //
 
-
-// Import 'Open Sans' font family
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
-
-
-// Apply styles to all DatePicker children
-.date-picker-input *, .date-picker-container * {
-   margin: 0;
-   outline: 0;
-   padding: 0;
-   user-select: none;
-   box-sizing: border-box;
-   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
-
-
-// DatePicker: input field
-.date-picker-input {
-   display: grid;
-   width: 170px;
-   height: 30px;
-   border-radius: 5px;
-   transition: all .3s;
-   align-items: center;
-   margin: 0 !important;
-   outline: 0 !important;
-   background: #ffffff;
-   border: 1px solid #dddddd;
-   grid-template-columns: 1fr max-content max-content;
-
-// Input field
-&__field {
-   display: grid;
-   height: 100%;
-   border: none;
-   min-width: 0px;
-   color: #354052;
-   font-size: 15px;
-   padding: 0px 10px;
-   border-radius: 5px;
-   margin: 0 !important;
-   outline: 0 !important;
-   align-content: center;
-   font-variant: tabular-nums;
-   font-feature-settings: "tnum";
-&::-webkit-input-placeholder {
-   color: #bbbbbb; } }
-
-// Calendar icon
-&__calendar-icon {
-   display: grid;
-   opacity: 1;
-   fill: #dddddd;
-   border-radius: 5px;
-   align-items: center;
-   transition: opacity 0.4s;
-   border: 5px solid #ffffff;
-svg {
-   width: 20px;
-   height: 20px; } }
-
-// Close icon
-&__close-icon {
-   display: grid;
-   height: 100%;
-   opacity: 0;
-   padding: 0;
-   fill: #ffffff;
-   border-radius: 50%;
-   align-items: center;
-   background: #dddddd;
-   border: 0 solid #ffffff;
-   transition: opacity 0.4s, background-color 0.4s;
-svg {
-   width: 0;
-   height: 0; }
-&:hover {
-   cursor: pointer;
-   background: #bbbbbb; } }
-
-// Switch between calendar and close icons
-&:hover > &__field:not([value=""]) ~ &__calendar-icon {
-   border: 0;
-   padding: 0;
-   opacity: 0;
-svg {
-   width: 0;
-   height: 0; } }
-&:hover > &__field:not([value=""]) ~ &__close-icon {
-   opacity: 1;
-   padding: 3px;
-   border-width: 6px;
-svg {
-   width: 12px;
-   height: 12px; } }
-
-// Hovered and active styles
-&:hover {
-   border-color: #0074d9;
-   cursor: text !important; }
-&:active {
-   box-shadow: 0px 0px 3px #0074d9; } }
-
-
-// DatePicker: picker overlay
-#date-picker-overlay {
-   position: absolute;
-   top: 0px;
-   left: 0px;
-   width: 100%; }
-
-
 // DatePicker: picker design
-.date-picker-container {
+.neodatepicker-picker {
    display: grid;
    width: 280px;
    position: absolute;
@@ -126,11 +15,13 @@ svg {
    box-shadow: 0 2px 8px #d8d8d8;
    grid-template-rows: repeat(4, max-content);
 
+// Input wrapper
 &__input-wrapper {
    width: 100%;
    height: 31px;
    border-bottom: 1px solid #eeeeee; }
 
+// Input field
 &__input {
    width: 100%;
    height: 100%;
@@ -146,6 +37,7 @@ svg {
 &::-webkit-input-placeholder {
    color: #bbbbbb; } }
 
+// Header
 &__header {
    display: grid;
    width: 100%;
@@ -157,6 +49,7 @@ svg {
    border-bottom: 1px solid #eeeeee;
    grid-template-columns: max-content 1fr max-content; }
 
+// Header previous & header next
 &__header-prev, &__header-next {
    display: grid;
    align-items: center;
@@ -172,16 +65,19 @@ svg {
    fill: #0074d9;
    cursor: pointer; } } }
 
+// Header month
 &__header-month {
    width: 100%;
    text-align: center; }
 
+// Body
 &__body {
    display: grid;
    padding: 10px;
    grid-gap: 5px;
    grid-template-columns: repeat(7, 1fr); }
 
+// Body day
 &__body-day {
    display: grid;
    width: 100%;
@@ -203,7 +99,7 @@ svg {
 &:hover {
    cursor: pointer !important;
    border: 2px solid #ff6f6a !important; }
-&.date-picker {
+&.neodatepicker {
 &--today {
    color: #ff6f6a; }
 &--selected {
@@ -216,6 +112,4 @@ svg {
    pointer-events: none !important; }
 &--daylist {
    pointer-events: none !important;
-   background: transparent !important; } } }
-
-}
+   background: transparent !important; } } } }

@@ -2,6 +2,6 @@
 // 'DatePicker' entry point
 //
 
-import DatePicker from './DatePicker';
+import Wrapper from './Wrapper';
 
-export default DatePicker;
+export default Wrapper;

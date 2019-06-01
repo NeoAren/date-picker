@@ -1,53 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { addMonths } from 'date-fns';
 
-const Wrapper = ({ id, inputField, datePicker, close }) => {
+import './Wrapper.scss';
 
-   // State of the date-picker
+import InputField from './InputField';
+import DatePicker from './DatePicker';
+import loadLocaleFile from './loadLocaleFile';
+
+const Wrapper = ({ id, selected, lang }) => {
+
+   // Load the locale file
+   const locale = { locale: loadLocaleFile(lang) };
+
+   // State of the picker
    const [open, setOpen] = useState(false);
+
+   // Save the selected date and the current month in the state
+   const [selectedDate, setSelectedDate] = useState(selected || undefined);
+   const [currentMonth, setCurrentMonth] = useState(selected || new Date());
 
    // Create getNode function
    const getNode = node => document.querySelector(node);
 
-   // Close function
-   const closeDatePicker = () => {
-      setOpen(false);
-      close();
-   };
-
-   // Open or close the date-picker
+   // Open or close the picker
    useEffect(() => {
       const openCloseDatePicker = e => {
          const inputElement = getNode('#' + id + '-input');
-         const datePickerElement = getNode('#' + id + '-container');
+         const pickerElement = getNode('#' + id + '-picker');
          if (!open && inputElement.contains(e.target)) {
             if (!inputElement.childNodes[1].contains(e.target)) setOpen(true);
          }
-         if (open && !datePickerElement.contains(e.target)) closeDatePicker();
+         if (open && !pickerElement.contains(e.target)) {
+            setOpen(false);
+            setCurrentMonth(selectedDate || new Date());
+         }
       };
       document.addEventListener('click', openCloseDatePicker);
       return () => document.removeEventListener('click', openCloseDatePicker);
-   }, [open]);
+   });
 
-   // Close the date-picker when the window is resized
+   // Close the picker when the window is resized
    useEffect(() => {
-      window.onresize = () => open && closeDatePicker();
-   }, [open]);
+      window.onresize = () => {
+         if (!open) return;
+         setOpen(false);
+         setCurrentMonth(selectedDate || new Date());
+      };
+   });
 
-   // Add date-picker overlay if it doesn't exist
+   // Add container element if it doesn't exist
    useEffect(() => {
-      if (getNode('#date-picker-overlay')) return;
-      const overlay = document.createElement('div');
-      overlay.setAttribute('id', 'date-picker-overlay');
-      getNode('body').appendChild(overlay);
+      if (getNode('#neodatepicker-container')) return;
+      const containerElement = document.createElement('div');
+      containerElement.setAttribute('id', 'neodatepicker-container');
+      getNode('body').appendChild(containerElement);
    }, []);
+
+   // Clear selected
+   const clearSelected = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
+
+   const updateMonth = modifier => setCurrentMonth(addMonths(currentMonth, modifier));
+
+   const updateSelected = newSelected => { setSelectedDate(newSelected); setCurrentMonth(newSelected); };
 
    // Render the date-picker or the input field
    return (
       <>
-         {inputField()}
-         {open && ReactDOM.createPortal(datePicker(), getNode('#date-picker-overlay'))}
+         <InputField id={id} selected={selectedDate} clearSelected={clearSelected} />
+         {open && ReactDOM.createPortal((
+            <DatePicker id={id} selected={selectedDate} month={currentMonth} updateSelected={updateSelected} updateMonth={updateMonth} locale={locale} />
+         ), getNode('#neodatepicker-container'))}
       </>
    );
 
@@ -55,9 +79,12 @@ const Wrapper = ({ id, inputField, datePicker, close }) => {
 
 Wrapper.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-   inputField: PropTypes.func.isRequired,
-   datePicker: PropTypes.func.isRequired,
-   close: PropTypes.func.isRequired
+   selected: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
+   lang: PropTypes.string
+};
+
+Wrapper.defaultProps = {
+   lang: 'en'
 };
 
 export default Wrapper;
