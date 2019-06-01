@@ -211,9 +211,9 @@ svg {
    background: #ff6f6a !important;
    border: 2px solid #ff6f6a !important; }
 &--disabled {
-   color: #cccccc !important;
-   pointer-events: none !important;
-   background: transparent !important; }
+   color: #cccccc;
+   background: transparent;
+   pointer-events: none !important; }
 &--daylist {
    pointer-events: none !important;
    background: transparent !important; } } }
