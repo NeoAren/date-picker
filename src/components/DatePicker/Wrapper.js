@@ -20,7 +20,7 @@ const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
    const getNode = node => document.querySelector(node);
 
    // Load the locale file
-   const locale = { locale: loadLocaleFile(lang) };
+   const locale = { locale: loadLocaleFile(lang || 'en') };
 
    // Update the current month
    const updateMonth = modifier => setMonth(addMonths(month, modifier));
@@ -107,10 +107,6 @@ Wrapper.propTypes = {
    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
    lang: PropTypes.string,
    placeholder: PropTypes.string
-};
-
-Wrapper.defaultProps = {
-   lang: 'en'
 };
 
 export default Wrapper;
