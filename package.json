@@ -1,8 +1,17 @@
 {
    "name": "neo-date-picker",
    "version": "1.0.0",
-   "description": "A simple react.js date-picker module",
+   "description": "A modern and easy-to-use React date-picker component",
    "main": "server.js",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/NeoAren/neo-date-picker.git"
+   },
+   "author": "NeoAren",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/NeoAren/neo-date-picker/issues"
+   },
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "node server.js",
@@ -12,8 +21,21 @@
       "start-analyze-server": "node_modules/.bin/webpack-bundle-analyzer stats.json",
       "postinstall": "webpack -p --config webpack.prod.config.js"
    },
-   "author": "NeoAren",
-   "license": "MIT",
+   "homepage": "https://neoaren.github.io/neo-date-picker/",
+   "keywords": [
+      "react",
+      "date picker",
+      "react-component",
+      "datepicker",
+      "picker",
+      "calendar",
+      "input"
+   ],
+   "dependencies": {
+      "body-parser": "^1.19.0",
+      "date-fns": "^1.30.1",
+      "express": "^4.17.1"
+   },
    "devDependencies": {
       "@babel/core": "^7.4.5",
       "@babel/preset-env": "^7.4.5",
@@ -34,24 +56,7 @@
       "webpack-bundle-analyzer": "^3.3.2",
       "webpack-cli": "^3.3.2",
       "webpack-dev-middleware": "^3.7.0",
-      "webpack-dev-server": "^3.4.1",
+      "webpack-dev-server": "^3.5.1",
       "webpack-hot-middleware": "^2.25.0"
-   },
-   "dependencies": {
-      "body-parser": "^1.19.0",
-      "date-fns": "^1.30.1",
-      "express": "^4.17.1"
-   },
-   "browserslist": [
-      "last 3 versions",
-      "> 1%",
-      "not dead",
-      "safari >= 5",
-      "unreleased versions",
-      "node 10"
-   ],
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/NeoAren/neo-date-picker.git"
    }
 }
