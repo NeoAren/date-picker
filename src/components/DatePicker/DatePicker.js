@@ -17,9 +17,8 @@ const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }
    const dateStart = startOfWeek(startOfMonth(month), { weekStartsOn: 1 });
    const dateEnd = endOfWeek(endOfMonth(month), { weekStartsOn: 1 });
 
-   // Set formatted date, onChange handler and base classname
+   // Set formatted date and base classname
    const date = !selected ? '' : format(selected, 'YYYY-MM-DD');
-   const onChange = e => console.log(e.target.value);
    const className = 'neodatepicker-picker';
 
    // Render the body
@@ -60,7 +59,7 @@ const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }
    return (
       <div id={id + '-picker'} className={className} style={style}>
          <div className={className + '__input-wrapper'}>
-            <input className={className + '__input'} autoFocus={true} value={date} onChange={onChange} placeholder="Select date" />
+            <input className={className + '__input'} autoFocus={true} defaultValue={date} placeholder="YYYY-MM-DD" />
          </div>
          <div className={className + '__header'}>
             <div className={className + '__header-prev'} onClick={() => updateMonth(-1)}>

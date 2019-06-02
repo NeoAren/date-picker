@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { addMonths } from 'date-fns';
+import { addMonths, format, parse } from 'date-fns';
 
 import './Wrapper.scss';
 
@@ -30,6 +30,8 @@ const Wrapper = ({ id, selected, lang }) => {
          const inputElement = getNode('#' + id + '-input');
          const pickerElement = getNode('#' + id + '-picker');
          if (!open && inputElement.contains(e.target)) {
+            console.log(window.getSelection().toString() !== '');
+            if (window.getSelection().toString() !== '') return;
             if (!inputElement.childNodes[1].contains(e.target)) setOpen(true);
          }
          if (open && typeof e.target.className === 'string') {
@@ -40,8 +42,8 @@ const Wrapper = ({ id, selected, lang }) => {
             setCurrentMonth(selectedDate || new Date());
          }
       };
-      document.addEventListener('click', openCloseDatePicker);
-      return () => document.removeEventListener('click', openCloseDatePicker);
+      document.addEventListener('mouseup', openCloseDatePicker);
+      return () => document.removeEventListener('mouseup', openCloseDatePicker);
    });
 
    // Close the picker when the window is resized
@@ -60,6 +62,23 @@ const Wrapper = ({ id, selected, lang }) => {
       containerElement.setAttribute('id', 'neodatepicker-container');
       getNode('body').appendChild(containerElement);
    }, []);
+
+   // Validate input in picker__input
+   useEffect(() => {
+      const validateInput = e => {
+         const input = getNode('.neodatepicker-picker__input');
+         const picker = getNode('#' + id + '-picker');
+         if (!open || !picker || !input || e.key !== 'Enter' || !picker.contains(e.target)) return;
+         const value = input.value;
+         if (value.match(/^(\d{4})-(\d{2})-(\d{2})$/) && value === format(parse(value), 'YYYY-MM-DD')) {
+            setSelectedDate(parse(value));
+            setCurrentMonth(parse(value));
+            setOpen(false);
+         }
+      };
+      document.addEventListener('keyup', validateInput);
+      return () => document.removeEventListener('keyup', validateInput);
+   });
 
    // Functions passed down to InputField and DatePicker
    const clearSelected = () => { setCurrentMonth(new Date()); setSelectedDate(undefined); };
