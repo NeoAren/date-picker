@@ -30,7 +30,6 @@ const Wrapper = ({ id, selected, lang }) => {
          const inputElement = getNode('#' + id + '-input');
          const pickerElement = getNode('#' + id + '-picker');
          if (!open && inputElement.contains(e.target)) {
-            console.log(window.getSelection().toString() !== '');
             if (window.getSelection().toString() !== '') return;
             if (!inputElement.childNodes[1].contains(e.target)) setOpen(true);
          }
