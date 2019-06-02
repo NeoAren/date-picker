@@ -1,11 +1,13 @@
 import React from 'react';
 
+import './App.scss';
+
 import DatePicker from './DatePicker';
 
 const App = () => {
 
    return (
-      <div id="test">
+      <div id="app">
          <span>Start date:</span>
          <DatePicker id="picker1" lang="en" selected={1001800800000} />
          <span>End date:</span>
