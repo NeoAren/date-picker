@@ -7,7 +7,7 @@ import './DatePicker.scss';
 
 import { ChevronLeft, ChevronRight } from './icons';
 
-const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }) => {
+const DatePicker = ({ id, selected, select, month, updateMonth, locale }) => {
 
    // Set the position of the date-picker
    const inputElement = document.querySelector('#' + id + '-input');
@@ -43,9 +43,8 @@ const DatePicker = ({ id, selected, month, updateSelected, updateMonth, locale }
          dayClassName += !isSameMonth(day, month) ? ' neodatepicker--disabled' : '';
          dayClassName += isSameDay(day, selected) ? ' neodatepicker--selected' : '';
          dayClassName += isSameDay(day, new Date()) ? ' neodatepicker--today' : '';
-         const select = e => updateSelected(currentDay);
          daysInMonth.push(
-            <div className={dayClassName} key={day} onClick={select}>
+            <div className={dayClassName} key={day} onClick={e => select(currentDay)}>
                {format(day, 'D')}
             </div>
          );
@@ -82,7 +81,7 @@ DatePicker.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
    selected: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
    month: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
-   updateSelected: PropTypes.func.isRequired,
+   select: PropTypes.func.isRequired,
    updateMonth: PropTypes.func.isRequired,
    locale: PropTypes.object
 };
