@@ -1,8 +1,8 @@
 # [Neo Date Picker](https://neoaren.github.io/neo-date-picker/)
 
-> 📅 A modern and easy-to-use React date-picker component
-
 [![NPM](https://img.shields.io/npm/v/neo-date-picker.svg)](https://www.npmjs.com/package/neo-date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+> 📅 A modern and easy-to-use React date-picker component
 
 ## Install
 
