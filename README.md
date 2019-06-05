@@ -1,23 +1,31 @@
-# [Date Picker](https://neoaren.github.io/neo-date-picker/)
-📅 A modern and easy-to-use React date-picker component
+# neo-date-picker
 
-## Installation & Usage
+> 📅 A modern and easy-to-use React date-picker component
 
-```sh
-npm install neo-date-picker --save
+[![NPM](https://img.shields.io/npm/v/neo-date-picker.svg)](https://www.npmjs.com/package/neo-date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+## Install
+
+```bash
+npm install --save neo-date-picker
 ```
 
-### Include the Component
+## Usage
 
-```js
-import React from 'react'
+```jsx
+import React, { Component } from 'react'
+
 import DatePicker from 'neo-date-picker'
 
-class Component extends React.Component {
-
-  render() {
-    return <DatePicker id="my-datepicker-1" />
+class Example extends Component {
+  render () {
+    return (
+      <DatePicker />
+    )
   }
-
 }
 ```
+
+## License
+
+MIT © [NeoAren](https://github.com/NeoAren)
