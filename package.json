@@ -1,62 +1,58 @@
 {
-   "name": "neo-date-picker",
-   "version": "1.0.0",
-   "description": "A modern and easy-to-use React date-picker component",
-   "main": "server.js",
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/NeoAren/neo-date-picker.git"
-   },
-   "author": "NeoAren",
-   "license": "MIT",
-   "bugs": {
-      "url": "https://github.com/NeoAren/neo-date-picker/issues"
-   },
-   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node server.js",
-      "build": "webpack --mode development",
-      "analyzer": "npm run generate-webpack-stats && npm run start-analyze-server",
-      "generate-webpack-stats": "node_modules/.bin/webpack --profile --json > stats.json",
-      "start-analyze-server": "node_modules/.bin/webpack-bundle-analyzer stats.json",
-      "postinstall": "webpack -p --config webpack.prod.config.js"
-   },
-   "homepage": "https://neoaren.github.io/neo-date-picker/",
-   "keywords": [
-      "react",
-      "date picker",
-      "react-component",
-      "datepicker",
-      "picker",
-      "calendar",
-      "input"
-   ],
-   "dependencies": {
-      "body-parser": "^1.19.0",
-      "date-fns": "^1.30.1",
-      "express": "^4.17.1"
-   },
-   "devDependencies": {
-      "@babel/core": "^7.4.5",
-      "@babel/preset-env": "^7.4.5",
-      "@babel/preset-react": "^7.0.0",
-      "babel-eslint": "^10.0.1",
-      "babel-loader": "^8.0.6",
-      "babel-polyfill": "^6.26.0",
-      "css-loader": "^2.1.1",
-      "eslint": "^5.16.0",
-      "eslint-loader": "^2.1.2",
-      "node-sass": "^4.12.0",
-      "react": "^16.8.6",
-      "react-dom": "^16.8.6",
-      "react-router-dom": "^4.3.1",
-      "sass-loader": "^7.1.0",
-      "style-loader": "^0.23.1",
-      "webpack": "^4.32.2",
-      "webpack-bundle-analyzer": "^3.3.2",
-      "webpack-cli": "^3.3.2",
-      "webpack-dev-middleware": "^3.7.0",
-      "webpack-dev-server": "^3.5.1",
-      "webpack-hot-middleware": "^2.25.0"
-   }
+	"name": "neo-date-picker",
+	"version": "1.0.0",
+	"description": "A modern and easy-to-use React date-picker component",
+	"author": "NeoAren",
+	"license": "MIT",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"scripts": {
+		"build": "cross-env NODE_ENV=production rollup -c",
+		"start": "cross-env NODE_ENV=development rollup -c -w",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"homepage": "https://github.com/NeoAren/neo-date-picker#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NeoAren/neo-date-picker.git"
+	},
+	"bugs": {
+		"url": "https://github.com/NeoAren/neo-date-picker/issues"
+	},
+	"dependencies": {
+		"date-fns": "^1.30.1",
+		"prop-types": "^15.7.2"
+	},
+	"peerDependencies": {
+		"react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.0.0",
+		"cross-env": "^5.2.0",
+		"node-sass": "^4.12.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"rollup": "^1.14.3",
+		"rollup-plugin-babel": "^4.3.2",
+		"rollup-plugin-commonjs": "^10.0.0",
+		"rollup-plugin-node-resolve": "^5.0.1",
+		"rollup-plugin-peer-deps-external": "^2.2.0",
+		"rollup-plugin-postcss": "^2.0.3",
+		"rollup-plugin-replace": "^2.2.0"
+	},
+	"keywords": [
+		"react",
+		"date picker",
+		"react-component",
+		"datepicker",
+		"picker",
+		"calendar",
+		"input"
+	],
+	"files": [
+		"dist"
+	]
 }

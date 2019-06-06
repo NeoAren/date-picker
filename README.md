@@ -13,17 +13,13 @@ npm install --save neo-date-picker
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react';
 
-import DatePicker from 'neo-date-picker'
+import DatePicker from 'neo-date-picker';
 
-class Example extends Component {
-  render () {
-    return (
-      <DatePicker />
-    )
-  }
-}
+const App = () => (
+  <DatePicker />
+);
 ```
 
 ## License

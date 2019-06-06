@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
-import './InputField.scss';
+import './styles/InputField.scss';
 
-import { Calendar as CalendarIcon, Close as CloseIcon } from './icons';
+import { Calendar as CalendarIcon, Close as CloseIcon } from '../icons';
 
 const InputField = ({ id, selected, reset, placeholder }) => {
 

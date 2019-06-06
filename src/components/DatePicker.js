@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { format, parse, addDays, isSameDay, isSameMonth } from 'date-fns';
 import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
 
-import './DatePicker.scss';
+import './styles/DatePicker.scss';
 
-import { ChevronLeft, ChevronRight } from './icons';
+import { ChevronLeft, ChevronRight } from '../icons';
 
 const DatePicker = ({ id, selected, select, month, updateMonth, locale }) => {
 
