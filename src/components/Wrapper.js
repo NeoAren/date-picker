@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { addMonths, format, parse } from 'date-fns';
 
-import './Wrapper.scss';
+import './styles/Wrapper.scss';
 
 import InputField from './InputField';
 import DatePicker from './DatePicker';
-import loadLocaleFile from './loadLocaleFile';
+import loadLocaleFile from '../helpers/loadLocaleFile';
 
 const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
 
@@ -87,7 +87,7 @@ const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
             reset={() => select(undefined)}
             placeholder={placeholder}
          />
-         {open && ReactDOM.createPortal((
+         {open && createPortal((
             <DatePicker
                id={id}
                month={month}
