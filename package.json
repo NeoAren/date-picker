@@ -1,5 +1,5 @@
 {
-	"name": "neo-date-picker",
+	"name": "@neoaren/date-picker",
 	"version": "1.0.0",
 	"description": "A modern and easy-to-use React date-picker component",
 	"author": "NeoAren",
@@ -9,7 +9,7 @@
 	"scripts": {
 		"build": "cross-env NODE_ENV=production rollup -c",
 		"start": "cross-env NODE_ENV=development rollup -c -w",
-		"prepublish": "npm run build",
+		"prepare": "npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"homepage": "https://github.com/NeoAren/neo-date-picker#readme",
