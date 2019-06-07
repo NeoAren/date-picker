@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { addMonths, format, parse } from 'date-fns';
+import { addMonths, format, parse, isEqual, startOfDay } from 'date-fns';
 
 import './styles/Wrapper.scss';
 
@@ -9,12 +9,12 @@ import InputField from './InputField';
 import DatePicker from './DatePicker';
 import loadLocaleFile from '../helpers/loadLocaleFile';
 
-const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
+const Wrapper = ({ id, defaultValue, onChange, lang, placeholder }) => {
 
    // Save the state of the picker, the selected date and the current month
    const [open, setOpen] = useState(false);
    const [month, setMonth] = useState(defaultValue || new Date());
-   const [selected, setSelected] = useState(defaultValue || undefined);
+   const [selected, setSelected] = useState(startOfDay(parse(defaultValue)) || undefined);
 
    // Create getNode function
    const getNode = node => document.querySelector(node);
@@ -27,6 +27,7 @@ const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
 
    // Select a new date, update selected and month, close picker
    const select = date => {
+		if (onChange && !isEqual(date, selected)) onChange(date);
       setMonth(date || new Date());
       setSelected(date);
       setOpen(false);
@@ -105,6 +106,7 @@ const Wrapper = ({ id, defaultValue, lang, placeholder }) => {
 Wrapper.propTypes = {
    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
+	onChange: PropTypes.func,
    lang: PropTypes.string,
    placeholder: PropTypes.string
 };
