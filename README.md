@@ -3,7 +3,7 @@ This package is currently undergoing development. Due to the frequent changes in
 
 # Neo Date Picker
 
-[![NPM](https://img.shields.io/npm/v/neo-date-picker.svg)](https://www.npmjs.com/package/neo-date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 > 📅 A modern and easy-to-use React date-picker component
 
