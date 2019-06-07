@@ -2,7 +2,7 @@ import external from 'rollup-plugin-peer-deps-external';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
-// import replace from 'rollup-plugin-replace';
+import replace from 'rollup-plugin-replace';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
@@ -24,15 +24,13 @@ export default {
 			presets: ['@babel/preset-env', '@babel/preset-react'],
 			exclude: 'node_modules/**'
 		}),
-		commonjs({
-			// include: /node_modules/
+		replace({
+			exclude: 'node_modules/**',
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 		}),
-		// replace({
-		// 	'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-		// }),
-		resolve({
-			// extensions: ['.js', '.jsx', '.json'],
-			// preferBuiltins: false
-		})
+		commonjs({
+			include: /node_modules/
+		}),
+		resolve()
 	]
 };
