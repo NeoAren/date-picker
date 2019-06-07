@@ -1,5 +1,5 @@
 # Work in Progress notice
-This package is currently undergoing development. Due to the frequent changes in the basic features and project structure, breaking changes might be introduced on a regular basis. Semantic versioning will also not be used until the release of 1.0.0. Please do not use this package until release.
+This package is currently undergoing development. Due to the frequent changes in the basic features and project structure, breaking changes might be introduced on a regular basis. Semantic versioning will also not be used until it's release. Please do not use this package yet.
 
 # Neo Date Picker
 
