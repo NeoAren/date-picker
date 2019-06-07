@@ -1,4 +1,4 @@
-# Neo Date Picker
+# Neo Date Picker (W.I.P.)
 
 [![NPM](https://img.shields.io/npm/v/neo-date-picker.svg)](https://www.npmjs.com/package/neo-date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
