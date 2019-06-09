@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker from 'neo-date-picker';
+import DatePicker from '@neoaren/date-picker';
 import './App.css';
 
 const App = () => {
