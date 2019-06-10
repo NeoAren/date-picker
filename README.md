@@ -10,7 +10,7 @@ This package is currently undergoing development. Due to the frequent changes in
 ## Install
 
 ```bash
-npm install --save neo-date-picker
+npm install @neoaren/date-picker
 ```
 
 ## Usage
@@ -18,11 +18,17 @@ npm install --save neo-date-picker
 ```jsx
 import React from 'react';
 
-import DatePicker from 'neo-date-picker';
+import DatePicker from '@neoaren/date-picker';
 
-const App = () => (
-  <DatePicker />
-);
+const App = () => {
+
+	const handler = date => console.log(date);
+
+	return (
+		<DatePicker id="my-datepicker" defaultValue={new Date()} onChange={handler} />
+	);
+
+};
 ```
 
 ## License
