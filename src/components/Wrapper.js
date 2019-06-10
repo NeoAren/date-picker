@@ -14,7 +14,7 @@ const Wrapper = ({ id, defaultValue, onChange, lang, placeholder }) => {
    // Save the state of the picker, the selected date and the current month
    const [open, setOpen] = useState(false);
    const [month, setMonth] = useState(defaultValue || new Date());
-   const [selected, setSelected] = useState(startOfDay(parse(defaultValue)) || undefined);
+   const [selected, setSelected] = useState(defaultValue ? startOfDay(parse(defaultValue)) : undefined);
 
    // Create getNode function
    const getNode = node => document.querySelector(node);
