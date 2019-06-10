@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight } from '../icons';
 
 const DatePicker = ({ id, selected, select, month, updateMonth, locale }) => {
 
-   // Set the position of the date-picker
+   // Set the position of the date picker
    const inputElement = document.querySelector('#' + id + '-input');
    const style = inputElement && { top: inputElement.offsetTop, left: inputElement.offsetLeft };
 

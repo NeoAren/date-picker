@@ -1,7 +1,7 @@
 {
 	"name": "@neoaren/date-picker",
-	"version": "1.0.2",
-	"description": "A modern and easy-to-use React date-picker component",
+	"version": "1.0.3",
+	"description": "A modern and easy-to-use React date picker component",
 	"author": "NeoAren",
 	"license": "MIT",
 	"main": "dist/index.cjs.js",

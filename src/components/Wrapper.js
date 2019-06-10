@@ -79,7 +79,7 @@ const Wrapper = ({ id, defaultValue, onChange, lang, placeholder }) => {
       return () => document.removeEventListener('keyup', validateInput);
    });
 
-   // Render the date-picker or the input field
+   // Render the date picker or the input field
    return (
       <>
          <InputField
@@ -104,7 +104,7 @@ const Wrapper = ({ id, defaultValue, onChange, lang, placeholder }) => {
 };
 
 Wrapper.propTypes = {
-   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+   id: PropTypes.PropTypes.string.isRequired,
    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
 	onChange: PropTypes.func,
    lang: PropTypes.string,

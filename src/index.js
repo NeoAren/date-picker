@@ -1,4 +1,4 @@
-// Entry point of 'neo-date-picker'
+// Entry point of '@neoaren/date-picker'
 
 import DatePicker from './components/Wrapper';
 
