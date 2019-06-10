@@ -1,6 +1,6 @@
 # Date Picker
 
-[![NPM](https://img.shields.io/npm/v/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![Github Commits Month](https://img.shields.io/github/commit-activity/m/neoaren/date-picker.svg)](https://github.com/NeoAren/date-picker) [![NPM Minzipped size](https://img.shields.io/bundlephobia/minzip/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![NPM Download Week](https://img.shields.io/npm/dw/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![NPM License](https://img.shields.io/npm/l/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker)
+[![NPM](https://img.shields.io/npm/v/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![NPM Minzipped size](https://img.shields.io/bundlephobia/minzip/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![NPM Download Week](https://img.shields.io/npm/dw/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![NPM License](https://img.shields.io/npm/l/@neoaren/date-picker.svg)](https://www.npmjs.com/package/@neoaren/date-picker)
 
 > 📅 A modern and easy-to-use React date picker component
 
