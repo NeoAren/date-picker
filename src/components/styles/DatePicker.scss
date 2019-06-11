@@ -17,7 +17,8 @@ $second-text-color: #cccccc;
    border-radius: 5px;
    background: $background-color;
    margin: 0 !important;
-   outline: 0 !important;
+	outline: 0 !important;
+	box-sizing: border-box;
    border: 1px solid $border-color;
    grid-template-rows: repeat(4, max-content);
 

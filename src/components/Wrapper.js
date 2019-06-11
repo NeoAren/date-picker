@@ -79,7 +79,7 @@ const Wrapper = ({ id, defaultValue, onChange, lang, placeholder }) => {
       return () => document.removeEventListener('keyup', validateInput);
    });
 
-   // Render the date picker or the input field
+   // Render the 'InputField' and the 'DatePicker'
    return (
       <>
          <InputField

@@ -54,7 +54,7 @@ const DatePicker = ({ id, selected, select, month, updateMonth, locale }) => {
       return daysInMonth;
    };
 
-   // Render DatePicker component
+   // Render 'DatePicker' component
    return (
       <div id={id + '-picker'} className={className} style={style}>
          <div className={className + '__input-wrapper'}>
@@ -78,7 +78,7 @@ const DatePicker = ({ id, selected, select, month, updateMonth, locale }) => {
 };
 
 DatePicker.propTypes = {
-   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+   id: PropTypes.PropTypes.string.isRequired,
    selected: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]),
    month: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(Date)]).isRequired,
    select: PropTypes.func.isRequired,
